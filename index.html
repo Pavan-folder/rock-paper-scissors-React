@@ -1,119 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rock Paper Scissors</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+import React from 'react';
+import './style.css';
 
-  <h1 class="title">Rock Paper Scissors</h1>
+const App = () => {
+  // Add your custom logic for handling player choice and game mechanics here
 
-  <div class="rockpaperscissors">
-    <div class="gap1">
-      <img src="Rock.jpg" class="choice" id="rock" alt="rock" />
+  return (
+    <div>
+      <h1 className="title">Rock Paper Scissors</h1>
+
+      <div className="rockpaperscissors">
+        <div className="gap1">
+          <img
+            src="Rock.jpg"
+            className="choice"
+            alt="rock"
+            // Add your custom onClick event for rock choice here
+          />
+        </div>
+        <div className="gap1">
+          <img
+            src="paper.jpg"
+            className="choice"
+            alt="paper"
+            // Add your custom onClick event for paper choice here
+          />
+        </div>
+        <div className="gap1">
+          <img
+            src="scissors.jpg"
+            className="choice"
+            alt="scissors"
+            // Add your custom onClick event for scissors choice here
+          />
+        </div>
+      </div>
+
+      <div id="status"></div>
+
+      <div className="versus-container">
+        <div className="player-box">
+          <p>You Chose:</p>
+          <img
+            id="playerImage"
+            className="result-img"
+            // Add your custom image source and alt here based on player's choice
+          />
+        </div>
+        <div className="vs-text">VS</div>
+        <div className="computer-box">
+          <p>Computer Chose:</p>
+          <img
+            id="computerImage"
+            className="result-img"
+         
+          />
+        </div>
+      </div>
+
+      <div className="result">
+        <p id="playerscore">Your Score: 0</p>
+        <p id="computerscore">Computer Score: 0</p>
+      </div>
+
+      <button id="resetBtn">
+        Reset Game
+        {/* Add your reset logic to clear scores and choices */}
+      </button>
     </div>
-    <div class="gap1">
-      <img src="paper.jpg" class="choice" id="paper" alt="paper" />
-    </div>
-    <div class="gap1">
-      <img src="scissors.jpg" class="choice" id="scissors" alt="scissors" />
-    </div>
-  </div>
+  );
+};
 
-  <div id="status"></div>
+export default App;
 
-  <div class="versus-container">
-    <div class="player-box">
-      <p>You Chose:</p>
-      <img id="playerImage" class="result-img" />
-    </div>
-    <div class="vs-text">VS</div>
-    <div class="computer-box">
-      <p>Computer Chose:</p>
-      <img id="computerImage" class="result-img" />
-    </div>
-  </div>
-
-  <div class="result">
-    <p id="playerscore">Your Score: 0</p>
-    <p id="computerscore">Computer Score: 0</p>
-  </div>
-
-  <button id="resetBtn">Reset Game</button>
-
-  <script>
-    const choice = document.querySelectorAll(".choice");
-    const status1 = document.getElementById("status");
-    const playerscore = document.getElementById("playerscore");
-    const computerscore = document.getElementById("computerscore");
-    const playerImage = document.getElementById("playerImage");
-    const computerImage = document.getElementById("computerImage");
-
-    let userscore = 0;
-    let computerscore1 = 0;
-
-    const computerchoice = () => {
-      const items = ["rock", "paper", "scissors"];
-      const randomindex = Math.floor(Math.random() * 3);
-      return items[randomindex];
-    };
-
-    const playgame = (playerchoice) => {
-      const computer = computerchoice();
-
-      playerImage.src = playerchoice + ".jpg";
-      computerImage.src = computer + ".jpg";
-
-      if (playerchoice === computer) {
-        draw();
-      } else if (
-        (playerchoice === "rock" && computer === "scissors") ||
-        (playerchoice === "paper" && computer === "rock") ||
-        (playerchoice === "scissors" && computer === "paper")
-      ) {
-        win();
-      } else {
-        lose();
-      }
-    };
-
-    const win = () => {
-      userscore++;
-      status1.innerText = "You win!";
-      status1.style.backgroundColor = "green";
-      playerscore.innerText = `Your Score: ${userscore}`;
-    };
-
-    const lose = () => {
-      computerscore1++;
-      status1.innerText = "Computer wins!";
-      status1.style.backgroundColor = "red";
-      computerscore.innerText = `Computer Score: ${computerscore1}`;
-    };
-
-    const draw = () => {
-      status1.innerText = "It's a draw!";
-      status1.style.backgroundColor = "orange";
-    };
-
-    choice.forEach(item => {
-      item.addEventListener("click", () => {
-        const playerchoice = item.getAttribute("id");
-        playgame(playerchoice);
-      });
-    });
-
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      userscore = 0;
-      computerscore1 = 0;
-      playerscore.innerText = "Your Score: 0";
-      computerscore.innerText = "Computer Score: 0";
-      status1.innerText = "";
-      playerImage.src = "";
-      computerImage.src = "";
-    });
-  </script>
-</body>
-</html>
